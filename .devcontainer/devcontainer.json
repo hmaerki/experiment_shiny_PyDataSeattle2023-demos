@@ -1,0 +1,111 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+	"name": "Python 3",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/python:0-3.11",
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/npm-package:1": {
+			"package": "typescript",
+			"version": "latest"
+		}
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "pip3 install --user -r requirements.txt -r requirements-dev.txt -r 00_penguins/requirements.txt -r 02_airmass/requirements.txt && (cd 03_brownian/shinymediapipe; npm install)",
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"Posit.shinyuieditor",
+				"Posit.shiny-python",
+				"ms-python.vscode-pylance"
+			],
+			"settings": {
+				"launch": {
+					"version": "0.2.0",
+					"configurations": [
+						{
+							"name": "Python: Current File",
+							"type": "python",
+							"request": "launch",
+							"program": "${file}",
+							"console": "integratedTerminal",
+							"justMyCode": true
+						},
+						{
+							"name": "00_penguins",
+							"type": "python",
+							"request": "launch",
+							"module": "shiny",
+							"console": "integratedTerminal",
+							"args": [
+								"run",
+								"app"
+							],
+							"cwd": "${workspaceFolder}/00_penguins",
+							"justMyCode": true
+						},
+						{
+							"name": "01_hello",
+							"type": "python",
+							"request": "launch",
+							"module": "shiny",
+							"console": "integratedTerminal",
+							"args": [
+								"run",
+								"app"
+							],
+							"cwd": "${workspaceFolder}/01_hello",
+							"justMyCode": true
+						},
+						{
+							"name": "01_hello-2",
+							"type": "python",
+							"request": "launch",
+							"module": "shiny",
+							"console": "integratedTerminal",
+							"args": [
+								"run",
+								"app-2"
+							],
+							"cwd": "${workspaceFolder}/01_hello",
+							"justMyCode": true
+						},
+						{
+							"name": "02_airmass",
+							"type": "python",
+							"request": "launch",
+							"module": "shiny",
+							"console": "integratedTerminal",
+							"args": [
+								"run",
+								"app"
+							],
+							"cwd": "${workspaceFolder}/02_airmass",
+							"justMyCode": true
+						},
+						{
+							"name": "03_brownian",
+							"type": "python",
+							"request": "launch",
+							"module": "shiny",
+							"console": "integratedTerminal",
+							"args": [
+								"run",
+								"app"
+							],
+							"cwd": "${workspaceFolder}/03_brownian",
+							"justMyCode": true
+						}
+					],
+					"compounds": []
+				}
+			}
+		}
+	}
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
